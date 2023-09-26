@@ -1,0 +1,26 @@
+@import 'colors';
+
+.form-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+    &:active {
+        border: none;
+    }
+}
+
+.btn {
+    background-color: $secondary-color;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
+    border: none;
+    width: 100%;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
