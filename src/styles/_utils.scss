@@ -1,0 +1,7 @@
+$margins: 5;
+
+@for $i from 1 through $margins {
+    .mt-#{$i} {
+        margin-top: #{$i}rem;
+    }
+}
