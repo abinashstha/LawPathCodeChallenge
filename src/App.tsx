@@ -2,6 +2,10 @@ import React, { useState, ChangeEvent } from 'react';
 import Input from './components/Input';
 import Button from './components/Button';
 import { initialFormValue } from './constants';
+import { showError } from './components/Notification';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     const [formValue, setFormValue] = useState(initialFormValue);
@@ -10,9 +14,14 @@ function App() {
         setFormValue((prev) => ({ ...prev, [e.target.id]: e.target.value }));
     };
 
+    const onSubmitHandler = (e: any) => {
+        e.preventDefault();
+        showError('Oh no no');
+    };
+
     return (
         <div className="container">
-            <form className="form">
+            <form className="form" onSubmit={onSubmitHandler}>
                 <Input
                     id="postcode"
                     label="Postcode"
@@ -33,6 +42,7 @@ function App() {
                     onChange={onChangeHandler}
                 />
                 <Button label="Submit" type="submit" className="mt-1" />
+                <ToastContainer />
             </form>
         </div>
     );
