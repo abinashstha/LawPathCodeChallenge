@@ -66,22 +66,29 @@ function App() {
                     `The postcode ${postcode} does not match the suburb ${suburb}`
                 );
             showSuccess(`The suburb ${suburb} exist in the state ${state}`);
-        } else
+        } else {
             showError(
                 `The suburb ${suburb} does not exist in the state ${state}`
             );
+        }
     };
 
     const validateFieldHandler = (field: keyof IFormValue) => {
-        setFieldValid((prev) => ({
-            ...prev,
-            [field]: !!formValue[field].length,
-        }));
+        if (field === 'postcode') {
+            setFieldValid((prev) => ({
+                ...prev,
+                postcode: +formValue.postcode > 0,
+            }));
+        } else
+            setFieldValid((prev) => ({
+                ...prev,
+                [field]: !!formValue[field].length,
+            }));
     };
 
     useEffect(() => {
         setFormIsValid(
-            +formValue.postcode !== 0 &&
+            +formValue.postcode > 0 &&
                 !!formValue.state.length &&
                 !!formValue.suburb.length
         );
