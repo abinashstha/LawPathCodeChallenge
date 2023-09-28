@@ -2,10 +2,10 @@ import React, { useState, ChangeEvent } from 'react';
 import Input from './components/Input';
 import Button from './components/Button';
 import { initialFormValue } from './constants';
-import { showError } from './components/Notification';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { validateAddress } from './services';
 
 function App() {
     const [formValue, setFormValue] = useState(initialFormValue);
@@ -14,9 +14,13 @@ function App() {
         setFormValue((prev) => ({ ...prev, [e.target.id]: e.target.value }));
     };
 
-    const onSubmitHandler = (e: any) => {
+    const onSubmitHandler = async (e: any) => {
         e.preventDefault();
-        showError('Oh no no');
+        const response = await validateAddress({
+            state: formValue.state,
+            suburb: formValue.suburb,
+        });
+        console.log(response);
     };
 
     return (
