@@ -1,19 +1,5 @@
 @import 'colors';
 
-.form-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-
-    &:active {
-        border: none;
-    }
-}
-
 .btn {
     background-color: $secondary-color;
     border-radius: 0.5rem;
@@ -23,4 +9,39 @@
     color: white;
     font-size: 1rem;
     cursor: pointer;
+}
+
+.control {
+    margin: 1rem 0;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+
+    label,
+    input {
+        display: block;
+    }
+
+    label {
+        font-weight: bold;
+        flex: 1;
+        color: $primary-color;
+        margin-bottom: 0.5rem;
+    }
+
+    input {
+        flex: 3;
+        font: inherit;
+        padding: 0.35rem 0.35rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #4f005f;
+    }
+}
+.control.invalid input {
+    border-color: $error-primary-color;
 }
