@@ -1,9 +1,15 @@
 import { ToastOptions } from 'react-toastify';
 
 export const initialFormValue: IFormValue = {
-    postcode: 0,
+    postcode: '',
     state: '',
     suburb: '',
+};
+
+export const initialFieldValue: IFieldValue = {
+    state: null,
+    postcode: null,
+    suburb: null,
 };
 
 export const notificationConfig: ToastOptions = {

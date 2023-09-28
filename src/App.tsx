@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import Input from './components/Input';
 import Button from './components/Button';
-import { initialFormValue } from './constants';
+import { initialFieldValue, initialFormValue } from './constants';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,17 +10,13 @@ import { showError, showSuccess } from './components/Notification';
 
 function App() {
     const [formValue, setFormValue] = useState<IFormValue>(initialFormValue);
-
-    const suburbRef = useRef<any>();
-    const stateRef = useRef<any>();
-    const postcodeRef = useRef<any>();
-
-    const [fieldValid, setFieldValid] = useState({
-        state: null,
-        postcode: null,
-        suburb: null,
-    });
+    const [fieldValid, setFieldValid] =
+        useState<IFieldValue>(initialFieldValue);
     const [formIsValid, setFormIsValid] = useState(false);
+
+    const suburbRef = useRef<HTMLInputElement>();
+    const stateRef = useRef<HTMLInputElement>();
+    const postcodeRef = useRef<HTMLInputElement>();
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.id === 'postcode') {
@@ -46,10 +42,10 @@ function App() {
             });
             checkValidity(response);
         } else if (!fieldValid.postcode) {
-            postcodeRef.current.focus();
-        } else if (!fieldValid.state) stateRef.current.focus();
+            postcodeRef?.current?.focus();
+        } else if (!fieldValid.state) stateRef?.current?.focus();
         else {
-            suburbRef.current.focus();
+            suburbRef?.current?.focus();
         }
     };
 
@@ -79,16 +75,13 @@ function App() {
     const validateFieldHandler = (field: keyof IFormValue) => {
         setFieldValid((prev) => ({
             ...prev,
-            [field]:
-                typeof formValue[field] === 'number'
-                    ? formValue[field] !== 0
-                    : !!formValue[field].toString().length,
+            [field]: !!formValue[field].length,
         }));
     };
 
     useEffect(() => {
         setFormIsValid(
-            formValue.postcode !== 0 &&
+            +formValue.postcode !== 0 &&
                 !!formValue.state.length &&
                 !!formValue.suburb.length
         );

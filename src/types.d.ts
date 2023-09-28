@@ -14,6 +14,12 @@ interface ILocality {
 
 interface IFormValue {
     suburb: string;
-    postcode: number;
+    postcode: string;
     state: string;
+}
+
+interface IFieldValue {
+    suburb: boolean | null;
+    postcode: boolean | null;
+    state: boolean | null;
 }
