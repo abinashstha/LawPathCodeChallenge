@@ -1,6 +1,6 @@
 import { ToastOptions } from 'react-toastify';
 
-export const initialFormValue = {
+export const initialFormValue: IFormValue = {
     postcode: 0,
     state: '',
     suburb: '',
